@@ -23,4 +23,6 @@ typedef enum {
 - (void)startAnimating;
 - (void)stopAnimating;
 
++(id)defaultWDActivityIndicator;
+
 @end

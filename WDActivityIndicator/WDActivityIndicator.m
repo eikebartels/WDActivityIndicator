@@ -18,6 +18,15 @@
 
 @implementation WDActivityIndicator
 
+
++(id)defaultWDActivityIndicator{
+    WDActivityIndicator * i = [[WDActivityIndicator alloc] init];
+    [i setHidesWhenStopped:YES];
+    [i setNativeIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    return i;
+
+}
+
 - (id)init {
 	return [self initWithFrame:CGRectZero];
 }
