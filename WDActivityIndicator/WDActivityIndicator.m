@@ -23,6 +23,7 @@
     WDActivityIndicator * i = [[WDActivityIndicator alloc] init];
     [i setHidesWhenStopped:YES];
     [i setNativeIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [i startAnimating];
     return i;
 
 }
