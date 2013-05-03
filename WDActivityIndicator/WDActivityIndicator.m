@@ -22,7 +22,8 @@
 +(id)defaultWDActivityIndicator{
     WDActivityIndicator * i = [[WDActivityIndicator alloc] init];
     [i setHidesWhenStopped:YES];
-    [i setNativeIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [i setNativeIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [i setIndicatorStyle:WDActivityIndicatorStyleSegmentLarge];
     [i startAnimating];
     return i;
 
