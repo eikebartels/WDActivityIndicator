@@ -22,8 +22,12 @@
 +(id)defaultWDActivityIndicator{
     WDActivityIndicator * i = [[WDActivityIndicator alloc] init];
     [i setHidesWhenStopped:YES];
-    [i setNativeIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [i setNativeIndicatorStyle:WDActivityIndicatorViewStyleGray];
     [i setIndicatorStyle:WDActivityIndicatorStyleSegmentLarge];
+    
+    if (kCustomIndicator) {
+        [i setNativeIndicatorStyle:WDActivityIndicatorViewStyleCustom];
+    }
     [i startAnimating];
     return i;
 
@@ -92,33 +96,46 @@
 	
 	// Set the style conforming native UIActivityIndicatorView constants.
 	switch (self.nativeIndicatorStyle) {
-		case UIActivityIndicatorViewStyleGray:
+		case WDActivityIndicatorViewStyleGray:
 			[imageName appendString:@"_gray"];
 			break;
 			
-		case UIActivityIndicatorViewStyleWhite:
+		case WDActivityIndicatorViewStyleWhite:
 			[imageName appendString:@"_white"];
 			break;
 			
-		case UIActivityIndicatorViewStyleWhiteLarge:
+		case WDActivityIndicatorViewStyleWhiteLarge:
 			// TODO: Create large white images
 			[imageName appendString:@"_white"];
 			break;
-			
+		case WDActivityIndicatorViewStyleCustom:
+			// TODO: Create large white images
+			[imageName appendString:@"_custom"];
+            imageName = [NSMutableString stringWithString:[imageName stringByReplacingOccurrencesOfString:@"WDActivityIndicator.bundle/" withString:@""]];
+			break;
 		default:
 			break;
 	}
-	
+	NSLog(@"imageName: %@", imageName);
 	UIImage *indicatorImage = [UIImage imageNamed:imageName];
 	
 	if (!self.activityImageView) {
 		self.activityImageView = [[UIImageView alloc] initWithImage:indicatorImage];
+        self.activityImageView.tag = 101;
 	}
 	
 	[self.activityImageView setImage:indicatorImage];
+    if (self.nativeIndicatorStyle == WDActivityIndicatorViewStyleCustom) {
+        [self.activityImageView setSize:indicatorImage.size];
+        if ([EBHelper isRetina]) {
+            [self.activityImageView setSize:ccs(indicatorImage.size.width/2, indicatorImage.size.height/2)];
+        }
+        [self.activityImageView setCenter:ccp(self.width/2, self.height/2)];
+    }
+    
 }
 
-- (void)setNativeIndicatorStyle:(UIActivityIndicatorViewStyle)nativeIndicatorStyle {
+- (void)setNativeIndicatorStyle:(WDActivityIndicatorViewStyle)nativeIndicatorStyle {
 	_nativeIndicatorStyle = nativeIndicatorStyle;
 	
 	[self setIndicatorStyle:self.indicatorStyle];

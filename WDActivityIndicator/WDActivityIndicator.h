@@ -14,11 +14,19 @@ typedef enum {
 	WDActivityIndicatorStyleSegmentLarge
 } WDActivityIndicatorStyle;
 
+typedef enum {
+	WDActivityIndicatorViewStyleWhiteLarge,
+	WDActivityIndicatorViewStyleWhite,
+	WDActivityIndicatorViewStyleGray,
+    WDActivityIndicatorViewStyleCustom
+} WDActivityIndicatorViewStyle;
+
+
 @interface WDActivityIndicator : UIView
 
 @property (nonatomic) BOOL hidesWhenStopped;
 @property (nonatomic) WDActivityIndicatorStyle indicatorStyle;
-@property (nonatomic) UIActivityIndicatorViewStyle nativeIndicatorStyle;
+@property (nonatomic) WDActivityIndicatorViewStyle nativeIndicatorStyle;
 
 - (void)startAnimating;
 - (void)stopAnimating;
