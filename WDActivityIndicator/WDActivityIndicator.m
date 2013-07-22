@@ -116,7 +116,7 @@
 		default:
 			break;
 	}
-	NSLog(@"imageName: %@", imageName);
+	//NSLog(@"imageName: %@", imageName);
 	UIImage *indicatorImage = [UIImage imageNamed:imageName];
 	
 	if (!self.activityImageView) {
